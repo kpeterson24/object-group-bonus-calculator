@@ -40,4 +40,48 @@ const employees = [
 // This is not a race. Everyone on your team should understand what is happening.
 // Ask questions when you don't.
 
+
+function employeeBonuses(employee) {
+  let bonusPercentage = 0;
+  let totalBonus = 0;
+
+  if (employee.reviewRating === 3) {
+    bonusPercentage += 0.04;
+  } else if (employee.reviewRating === 4) {
+    bonusPercentage += 0.06;
+  } else if (employee.reviewRating === 5) {
+    bonusPercentage += 0.1;
+  }
+  // Below, calculate additional 15%
+  if (employee.employeeNumber.length === 4) {
+    bonusPercentage += 0.05;
+  }
+  if (employee.annualSalary >= 65000) {
+    bonusPercentage -= 0.01;
+  } 
+  if (bonusPercentage > 0.13) {
+    bonusPercentage = 0.13;
+  }
+  if (bonusPercentage < 0) {
+    bonusPercentage = 0;
+  }
+  
+totalBonus = Math.round (employee.annualSalary * bonusPercentage);
+
+  return {
+    name: employee.name,
+    bonusPercentage: bonusPercentage,
+    totalCompensation: totalBonus + Number(employee.annualSalary),
+    totalBonus: totalBonus
+  }
+}
+
+
+  
+for (let i = 0; i < employees.length; i++) {
+  console.log(employeeBonuses(employees[i]))
+}
+
+
+
 console.log( employees );
